@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raihan Harismanzil - Personal Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* CSS Variables for Light and Dark Modes */
+    :root {
+      --color-bg-light: #f5f7fa;
+      --color-text-light: #1f2937;
+      --color-primary-light: #4f46e5;
+      --color-accent-light: #06b6d4;
+      --color-bg-dark: #121212;
+      --color-text-dark: #e0e0e0;
+      --color-primary-dark: #8b5cf6;
+      --color-accent-dark: #14b8a6;
+      --transition-duration: 0.4s;
+      --font-family: 'Inter', sans-serif;
+      --border-radius: 12px;
+      --spacing: 16px;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Dark Mode Variables */
+    body[data-theme='dark'] {
+      --color-bg: var(--color-bg-dark);
+      --color-text: var(--color-text-dark);
+      --color-primary: var(--color-primary-dark);
+      --color-accent: var(--color-accent-dark);
+      --shadow-color: var(--shadow-dark);
+    }
+
+    /* Light Mode Variables */
+    body:not([data-theme='dark']) {
+      --color-bg: var(--color-bg-light);
+      --color-text: var(--color-text-light);
+      --color-primary: var(--color-primary-light);
+      --color-accent: var(--color-accent-light);
+      --shadow-color: var(--shadow-light);
+    }
+
+    /* Global Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      transition: background-color var(--transition-duration) ease,
+        color var(--transition-duration) ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    a:hover,
+    a:focus {
+      color: var(--color-accent);
+      outline: none;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: var(--spacing) 0;
+    }
+
+    /* Header & navigation */
+    header {
+      background: var(--color-bg);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--shadow-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing) var(--spacing);
+      transition: background-color var(--transition-duration) ease;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      user-select: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing);
+    }
+
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--color-primary);
+      color: var(--color-bg);
+      outline: none;
+    }
+
+    /* Dark/Light mode toggle button */
+    .theme-toggle-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--color-primary);
+      padding: 6px;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+
+    .theme-toggle-button:hover,
+    .theme-toggle-button:focus {
+      background-color: var(--color-accent);
+      color: var(--color-bg);
+      outline: none;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation-fill-mode: forwards;
+      animation-duration: 0.8s;
+    }
+
+    section.visible {
+      animation-name: fadeInUp;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Home Section */
+    #home {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--color-bg);
+      background: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/554adb29-4499-448e-8912-3877cf45e986.png') no-repeat center/cover;
+      /* dark overlay */
+    }
+
+    #home::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      z-index: 0;
+      border-radius: var(--border-radius);
+    }
+
+    #home .content {
+      position: relative;
+      max-width: 700px;
+      z-index: 1;
+      padding: var(--spacing);
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: var(--spacing);
+      line-height: 1.1;
+      user-select: none;
+    }
+
+    #home h2 {
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: #d1d5dbcc;
+      user-select: none;
+    }
+
+    /* About Section */
+    #about p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      color: var(--color-text);
+    }
+
+    /* Skills Section */
+    #skills {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+    }
+
+    .skill {
+      background: var(--color-bg);
+      border: 1px solid var(--shadow-color);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+      box-shadow: 0 8px 20px var(--color-primary);
+    }
+
+    .skill h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: var(--shadow-color);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar > div {
+      height: 100%;
+      background: var(--color-accent);
+      border-radius: inherit;
+      transition: width 1s ease;
+    }
+
+    /* Project Section */
+    #projects {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .project-card {
+      background: var(--color-bg);
+      border: 1px solid var(--shadow-color);
+      border-radius: var(--border-radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 20px var(--color-primary);
+    }
+
+    .project-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--color-primary);
+      font-size: 1.25rem;
+    }
+
+    .project-description {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: var(--color-text);
+    }
+
+    /* Contact Section */
+    #contact {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      background: var(--color-bg);
+      border: 1px solid var(--shadow-color);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 10px var(--shadow-color);
+    }
+
+    input,
+    textarea {
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--shadow-color);
+      background-color: transparent;
+      color: var(--color-text);
+      transition: border-color 0.3s ease;
+      font-family: var(--font-family);
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 8px var(--color-accent);
+    }
+
+    button[type='submit'] {
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-bg);
+      background-color: var(--color-primary);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type='submit']:hover,
+    button[type='submit']:focus {
+      background-color: var(--color-accent);
+      outline: none;
+    }
+
+    .location-text {
+      margin-top: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      color: var(--color-primary);
+    }
+
+    /* Social links */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .social-link {
+      font-size: 28px;
+      color: var(--color-primary);
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover,
+    .social-link:focus {
+      color: var(--color-accent);
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      #home h1 {
+        font-size: 2rem;
+      }
+      #home h2 {
+        font-size: 1.1rem;
+      }
+      header {
+        padding: var(--spacing);
+      }
+      nav {
+        display: none; /* Simplify for mobile */
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 1024px) {
+      nav a {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Accessibility */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" tabindex="0">Raihan Harismanzil</div>
+    <nav aria-label="Primary Navigation">
+      <a href="#home" tabindex="0">Home</a>
+      <a href="#about" tabindex="0">About</a>
+      <a href="#skills" tabindex="0">Skills</a>
+      <a href="#projects" tabindex="0">Projects</a>
+      <a href="#contact" tabindex="0">Contact</a>
+    </nav>
+    <button class="theme-toggle-button" aria-label="Toggle Dark/Light Mode" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+      <span class="material-icons" id="themeIcon">dark_mode</span>
+    </button>
+  </header>
+
+  <main>
+    <section id="home" tabindex="0" aria-label="Home section welcome">
+      <div class="content">
+        <h1>Hi, I’m Raihan – Future Data Scientist</h1>
+        <h2>Welcome to my personal portfolio</h2>
+      </div>
+    </section>
+
+    <section id="about" tabindex="0" aria-label="About Me section">
+      <div class="container">
+        <h2 style="color: var(--color-primary); text-align: center; font-weight: 800; font-size: 2rem; margin-bottom: 32px;">About Me</h2>
+        <p>
+          I’m a 19-year-old BCA (AI specialization) student at Jain University with a passion for data science, AI, and technology. Currently learning Python, C, and Machine Learning.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" tabindex="0" aria-label="Skills section">
+      <div class="container">
+        <h2 style="color: var(--color-primary); text-align: center; font-weight: 800; font-size: 2rem; margin-bottom: 32px;">Skills</h2>
+        <div>
+          <div class="skill" role="region" aria-label="Python skill proficiency 85 percent">
+            <h3>Python</h3>
+            <div class="progress-bar" aria-hidden="true"><div style="width: 85%"></div></div>
+          </div>
+          <div class="skill" role="region" aria-label="C programming skill proficiency 70 percent">
+            <h3>C</h3>
+            <div class="progress-bar" aria-hidden="true"><div style="width: 70%"></div></div>
+          </div>
+          <div class="skill" role="region" aria-label="HTML and CSS skill proficiency 80 percent">
+            <h3>HTML / CSS</h3>
+            <div class="progress-bar" aria-hidden="true"><div style="width: 80%"></div></div>
+          </div>
+          <div class="skill" role="region" aria-label="Artificial Intelligence skill proficiency 75 percent">
+            <h3>Artificial Intelligence</h3>
+            <div class="progress-bar" aria-hidden="true"><div style="width: 75%"></div></div>
+          </div>
+          <div class="skill" role="region" aria-label="Machine Learning skill proficiency 65 percent">
+            <h3>Machine Learning</h3>
+            <div class="progress-bar" aria-hidden="true"><div style="width: 65%"></div></div>
+          </div>
+          <div class="skill" role="region" aria-label="Data Science Basics skill proficiency 60 percent">
+            <h3>Data Science Basics</h3>
+            <div class="progress-bar" aria-hidden="true"><div style="width: 60%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" tabindex="0" aria-label="Projects section">
+      <div class="container">
+        <h2 style="color: var(--color-primary); text-align: center; font-weight: 800; font-size: 2rem; margin-bottom: 32px;">Projects</h2>
+        <div>
+          <article class="project-card" tabindex="0" role="article" aria-labelledby="temp-converter-title">
+            <h3 class="project-title" id="temp-converter-title">Temperature Converter App</h3>
+            <p class="project-description">An app that converts temperatures between Celsius, Fahrenheit, and Kelvin scales.</p>
+          </article>
+          <article class="project-card" tabindex="0" role="article" aria-labelledby="ai-chatbot-title">
+            <h3 class="project-title" id="ai-chatbot-title">Basic AI Chatbot</h3>
+            <p class="project-description">A simple chatbot using Python that can answer basic questions and learn responses.</p>
+          </article>
+          <article class="project-card" tabindex="0" role="article" aria-labelledby="personal-assistant-title">
+            <h3 class="project-title" id="personal-assistant-title">Personal Assistant in Python</h3>
+            <p class="project-description">A voice-activated personal assistant built to manage tasks and provide information.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" tabindex="0" aria-label="Contact section">
+      <div class="container">
+        <h2 style="color: var(--color-primary); text-align: center; font-weight: 800; font-size: 2rem; margin-bottom: 32px;">Contact Me</h2>
+        <form id="contactForm" aria-label="Contact form">
+          <label for="nameInput">Name</label>
+          <input type="text" id="nameInput" name="name" placeholder="Your name" required aria-required="true" />
+          
+          <label for="emailInput">Email</label>
+          <input type="email" id="emailInput" name="email" placeholder="your.email@example.com" required aria-required="true" />
+          
+          <label for="messageInput">Message</label>
+          <textarea id="messageInput" name="message" rows="5" placeholder="Write your message here..." required aria-required="true"></textarea>
+          
+          <button type="submit">Send Message</button>
+        </form>
+        <p class="location-text" aria-label="Location">Location: Vytilla, Kochi, India</p>
+        <div class="social-links" role="navigation" aria-label="Social media links">
+          <a class="social-link" href="#" aria-label="GitHub profile" tabindex="0" target="_blank" rel="noopener noreferrer">
+            <span class="material-icons">code</span>
+          </a>
+          <a class="social-link" href="#" aria-label="LinkedIn profile" tabindex="0" target="_blank" rel="noopener noreferrer">
+            <span class="material-icons">business_center</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Dark/Light mode toggle logic
+    const themeToggleButton = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = 'light_mode';
+      } else {
+        document.body.removeAttribute('data-theme');
+        themeIcon.textContent = 'dark_mode';
+      }
+    }
+
+    // Initially set theme based on saved localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && userPrefersDark)) {
+      setTheme('dark');
+    }
+
+    themeToggleButton.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        setTheme('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        setTheme('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Animate sections on scroll
+    function onScroll() {
+      document.querySelectorAll('section').forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
+
+    // Contact form submission handling (simulated)
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! I will get back to you soon.');
+      contactForm.reset();
+    });
+  </script>
+</body>
+</html>
+
